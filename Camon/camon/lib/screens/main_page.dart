@@ -3,12 +3,14 @@
 import 'dart:io';
 
 import 'package:camera/camera.dart';
+import 'package:external_path/external_path.dart';
 import 'package:flutter/material.dart';
+// import 'package:external_path/external_path.dart';
+import 'package:media_scanner/media_scanner.dart';
 
 class MainPage extends StatefulWidget {
   final List<CameraDescription> cameras;
   const MainPage({super.key, required this.cameras});
-
   @override
   State<MainPage> createState() => _MainPageState();
 }
@@ -18,7 +20,51 @@ class _MainPageState extends State<MainPage> {
   late Future<void> cameraValue;
   bool isFlashEnabled = false; // check if flash is enabled
   bool isRearCamera = true; // check if rear camera is enabled
-  List<XFile> imagesList = []; // Storing image files as arrays
+  List<File> imagesList = []; // Storing image files as arrays
+
+  // Saving file in downloads folder
+  Future<File> saveImage(XFile image) async {
+    final downloadpath = await ExternalPath.getExternalStoragePublicDirectory(
+        ExternalPath.DIRECTORY_DOWNLOAD); // Getting downloads directory path
+    final filename =
+        '${DateTime.now().millisecondsSinceEpoch}.png'; // Saving date, time and millisecond of file to avoid duplicates. Also saving file as png
+    final file = File('$downloadpath/$filename');
+
+    try {
+      await file.writeAsBytes(await image.readAsBytes());
+    } catch (e) {}
+    return file;
+  }
+
+  // Method to capture images
+  void takePicture() async {
+    XFile? image;
+    if (cameraController.value.isTakingPicture ||
+        !cameraController.value.isInitialized) {
+      return;
+    }
+    if (isFlashEnabled == false) {
+      await cameraController.setFlashMode(FlashMode.off);
+    } else {
+      await cameraController
+          .setFlashMode(FlashMode.torch); // using torch light as flash
+    }
+    image = await cameraController.takePicture();
+    if (cameraController.value.flashMode == FlashMode.torch) {
+      setState(() {
+        cameraController.setFlashMode(
+            FlashMode.off); // if flash light or torch is on, turn off
+      });
+    }
+
+    final file = await saveImage(image);
+
+    setState(() {
+      imagesList.add(file);
+    });
+
+    MediaScanner.loadMedia(path: file.path); // loading image from path
+  }
 
   void startCamera(int camera) {
     cameraController = CameraController(
@@ -38,10 +84,10 @@ class _MainPageState extends State<MainPage> {
     final size = MediaQuery.of(context).size;
     return Scaffold(
       // Camera button
-      floatingActionButton: const FloatingActionButton(
+      floatingActionButton: FloatingActionButton(
         backgroundColor: Color.fromARGB(255, 255, 255, 255),
         shape: CircleBorder(),
-        onPressed: null,
+        onPressed: takePicture, // action to capture image
         child: Icon(
           Icons.camera_alt,
           size: 40,
@@ -167,7 +213,7 @@ class _MainPageState extends State<MainPage> {
                                 height: 100,
                                 width: 100,
                                 image: FileImage(
-                                  File(imagesList[index].path),
+                                  imagesList[index],
                                 ),
                                 fit: BoxFit.cover,
                               ),
