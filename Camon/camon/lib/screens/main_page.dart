@@ -1,5 +1,7 @@
 // import 'dart:math';
 
+import 'dart:io';
+
 import 'package:camera/camera.dart';
 import 'package:flutter/material.dart';
 
@@ -16,6 +18,7 @@ class _MainPageState extends State<MainPage> {
   late Future<void> cameraValue;
   bool isFlashEnabled = false; // check if flash is enabled
   bool isRearCamera = true; // check if rear camera is enabled
+  List<XFile> imagesList = []; // Storing image files as arrays
 
   void startCamera(int camera) {
     cameraController = CameraController(
@@ -134,6 +137,48 @@ class _MainPageState extends State<MainPage> {
                   ],
                 ),
               ),
+            ),
+          ),
+          // List to show captured images
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                SingleChildScrollView(
+                  scrollDirection: Axis.horizontal,
+                  child: Padding(
+                    padding: EdgeInsets.only(left: 7, bottom: 75),
+                    child: Container(
+                      height: 100,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: ListView.builder(
+                        shrinkWrap: true,
+                        itemCount: imagesList.length,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (BuildContext context, int index) {
+                          return Padding(
+                            padding: EdgeInsets.all(2),
+                            child: ClipRRect(
+                              borderRadius: BorderRadius.circular(10),
+                              child: Image(
+                                height: 100,
+                                width: 100,
+                                image: FileImage(
+                                  File(imagesList[index].path),
+                                ),
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          );
+                        },
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
