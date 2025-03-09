@@ -11,7 +11,7 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   final List<CameraDescription> cameras;
 
-  MyApp({required this.cameras});
+  const MyApp({super.key, required this.cameras});
 
   // const MyApp({super.key, required this.cameras});
 
@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+        debugShowCheckedModeBanner: false,
         title: 'Camera Demo',
         theme: ThemeData(
           // This is the theme of your application.
