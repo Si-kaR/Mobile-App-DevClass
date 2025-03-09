@@ -30,13 +30,28 @@ class _MainPageState extends State<MainPage> {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     return Scaffold(
+      // Camera button
+      floatingActionButton: const FloatingActionButton(
+        backgroundColor: Color.fromARGB(
+          255,
+          255,
+          255,
+          255,
+        ),
+        shape: CircleBorder(),
+        onPressed: null,
+        child: Icon(
+          Icons.camera_alt,
+          size: 40,
+          color: Colors.black87,
+        ),
+      ),
       body: Stack(
         children: [
           FutureBuilder<void>(
             future: cameraValue,
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
-                // return CameraPreview(cameraController);
                 return SizedBox(
                   width: size.width,
                   height: size.height,
