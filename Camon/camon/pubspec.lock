@@ -2,7 +2,7 @@
 # See https://dart.dev/tools/pub/glossary#lockfile
 packages:
   async:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: async
       sha256: "947bfcf187f74dbc5e146c9eb9c0f10c9f8b30743e341481c1e2ed3ecc18c20c"
@@ -21,18 +21,18 @@ packages:
     dependency: "direct main"
     description:
       name: camera
-      sha256: dfa8fc5a1adaeb95e7a54d86a5bd56f4bb0e035515354c8ac6d262e35cec2ec8
+      sha256: "413d2b34fe28496c35c69ede5b232fb9dd5ca2c3a4cb606b14efc1c7546cc8cb"
       url: "https://pub.dev"
     source: hosted
-    version: "0.10.6"
-  camera_android:
+    version: "0.11.1"
+  camera_android_camerax:
     dependency: transitive
     description:
-      name: camera_android
-      sha256: "997f19dbdb1bb0e40bdb87265c7e550abea657fe3c4ba3720f81e97b6d4b64dd"
+      name: camera_android_camerax
+      sha256: "13784f539c7f104766bff84e4479a70f03b29d78b208278be45c939250d9d7f5"
       url: "https://pub.dev"
     source: hosted
-    version: "0.10.10+1"
+    version: "0.6.14+1"
   camera_avfoundation:
     dependency: transitive
     description:
@@ -58,7 +58,7 @@ packages:
     source: hosted
     version: "0.3.5"
   characters:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: characters
       sha256: "04a925763edad70e8443c99234dc3328f442e811f1d8fd1a72f1c8ad0f69a605"
@@ -74,7 +74,7 @@ packages:
     source: hosted
     version: "1.1.1"
   collection:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: collection
       sha256: a1ace0a119f20aabc852d165077c036cd864315bd99b7eaa10a60100341941bf
@@ -193,7 +193,7 @@ packages:
     source: hosted
     version: "0.12.16+1"
   material_color_utilities:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: material_color_utilities
       sha256: f7142bb1154231d7ea5f96bc7bde4bda2a0945d2806bb11670e30b850d56bdec
@@ -209,7 +209,7 @@ packages:
     source: hosted
     version: "2.2.0"
   meta:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: meta
       sha256: bdb68674043280c3428e9ec998512fb681678676b3c54e773629ffe74419f8c7
