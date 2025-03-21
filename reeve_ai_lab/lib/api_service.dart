@@ -1,0 +1,11 @@
+// API Keys
+
+// Key1
+// const apikeyOpenReeveAi = "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";
+
+// Key2
+// const apikeyOpenReeveAi = "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";
+
+// Key3
+const apikeyOpenReeveAi =
+    "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";
