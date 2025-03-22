@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:reeve_ai_lab/screens/reeve_chat.dart';
+import 'package:reeve_ai_lab/screens/reeve_chat_page.dart';
 
 void main() {
   runApp(const MyApp());
