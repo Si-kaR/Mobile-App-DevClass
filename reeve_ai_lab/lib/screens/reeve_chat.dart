@@ -52,7 +52,7 @@ class _ReeveChatPageState extends State<ReeveChatPage> {
         //     1), // Reeve Green - I'll change to pruple cuz I love purple
         backgroundColor: Colors.deepPurple,
         title: const Text(
-          'Reeve Chat',
+          'Reeve Ai',
           style: TextStyle(color: Colors.white), // White text
         ),
       ),
