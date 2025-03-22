@@ -1,7 +1,7 @@
 import 'package:chat_gpt_sdk/chat_gpt_sdk.dart';
 import 'package:dash_chat_2/dash_chat_2.dart';
 import 'package:flutter/material.dart';
-import 'package:reeve_ai_lab/api_service.dart';
+import 'package:reeve_ai_lab/services/api_service.dart';
 
 class ReeveChatPage extends StatefulWidget {
   const ReeveChatPage({super.key});
@@ -81,6 +81,66 @@ class _ReeveChatPageState extends State<ReeveChatPage> {
 
   // Added Error Handling
   // Function to get chat response
+  // Future<void> getChatResponse(ChatMessage m) async {
+  //   setState(() {
+  //     _messages.insert(0, m);
+  //     _typingUsers.add(_gptChatUser);
+  //   });
+
+  //   // Prepare message history
+  //   List<Messages> _messagesHistory = _messages.reversed.map((m) {
+  //     return Messages(
+  //       role: m.user == _currentUser ? Role.user : Role.assistant,
+  //       content: m.text,
+  //     );
+  //   }).toList();
+
+  //   try {
+  //     // Build the request with the updated model
+  //     final request = ChatCompleteText(
+  //       model: Gpt4ChatModel(),
+  //       messages: _messagesHistory.map((message) => message.toJson()).toList(),
+  //       maxToken: 500,
+  //     );
+
+  //     // Get response from OpenAI
+  //     final response = await _openAI.onChatCompletion(request: request);
+
+  //     if (response != null && response.choices.isNotEmpty) {
+  //       // Extract the first valid message from the response
+  //       final reply = response.choices.first.message?.content ??
+  //           "Sorry, I didn't understand that.";
+
+  //       setState(() {
+  //         _messages.insert(
+  //           0,
+  //           ChatMessage(
+  //             text: reply,
+  //             user: _gptChatUser,
+  //             createdAt: DateTime.now(),
+  //           ),
+  //         );
+  //       });
+  //     }
+  //   } catch (e) {
+  //     // Handle errors gracefully
+  //     setState(() {
+  //       _messages.insert(
+  //         0,
+  //         ChatMessage(
+  //           text: "Oops! Something went wrong. Please try again.",
+  //           user: _gptChatUser,
+  //           createdAt: DateTime.now(),
+  //         ),
+  //       );
+  //     });
+  //     debugPrint('Error fetching response: $e');
+  //   } finally {
+  //     setState(() {
+  //       _typingUsers.remove(_gptChatUser);
+  //     });
+  //   }
+  // }
   Future<void> getChatResponse(ChatMessage m) async {
     setState(() {
       _messages.insert(0, m);
@@ -88,10 +148,10 @@ class _ReeveChatPageState extends State<ReeveChatPage> {
     });
 
     // Prepare message history
-    List<Messages> _messagesHistory = _messages.reversed.map((m) {
+    List<Messages> _messagesHistory = _messages.reversed.map((msg) {
       return Messages(
-        role: m.user == _currentUser ? Role.user : Role.assistant,
-        content: m.text,
+        role: msg.user == _currentUser ? Role.user : Role.assistant,
+        content: msg.text,
       );
     }).toList();
 
