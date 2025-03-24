@@ -1,0 +1,2 @@
+const String apiKey =
+    "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";

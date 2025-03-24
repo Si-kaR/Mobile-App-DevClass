@@ -1,0 +1,88 @@
+// // allprojects {
+// //     repositories {
+// //         google()
+// //         mavenCentral()
+// //     }
+// // }
+
+// // rootProject.buildDir = "../build"
+// // subprojects {
+// //     project.buildDir = "${rootProject.buildDir}/${project.name}"
+// // }
+// // subprojects {
+// //     project.evaluationDependsOn(":app")
+// // }
+
+// // tasks.register("clean", Delete) {
+// //     delete rootProject.buildDir
+// // }
+
+// // // From firebase console
+// // plugins {
+// //   // ...
+// //   // Add the dependency for the Google services Gradle plugin
+// //   id("com.google.gms.google-services") version "4.4.2" apply false
+
+// // }
+
+
+
+// allprojects {
+//     repositories {
+//         google()
+//         mavenCentral()
+//     }
+// }
+
+// buildscript {
+//     repositories {
+//         google()
+//         mavenCentral()
+//     }
+//     dependencies {
+//         // Update to latest version
+//         classpath 'com.google.gms:google-services:4.4.0'
+//     }
+// }
+
+// rootProject.buildDir = "../build"
+// subprojects {
+//     project.buildDir = "${rootProject.buildDir}/${project.name}"
+//     project.evaluationDependsOn(':app')
+// }
+
+// tasks.register("clean", Delete) {
+//     delete rootProject.buildDir
+// }
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+buildscript {
+    repositories {
+        google()
+        mavenCentral()
+    }
+    dependencies {
+        // Update to latest version
+        classpath 'com.google.gms:google-services:4.4.2'
+        // classpath 'com.google.gms:google-services:4.4.0'  // Updated latest : above
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:2.1.10" // Added this cuz was not available already idkw
+
+    }
+}
+
+rootProject.buildDir = "../build"
+subprojects {
+    project.buildDir = "${rootProject.buildDir}/${project.name}"
+    project.evaluationDependsOn(':app')
+}
+
+tasks.register("clean", Delete) {
+    delete rootProject.buildDir
+}
+
