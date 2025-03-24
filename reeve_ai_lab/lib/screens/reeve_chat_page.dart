@@ -14,7 +14,7 @@ class _ReeveChatPageState extends State<ReeveChatPage> {
   // Finally, adding ChatGPT's chat functionality as API
   // baseOption : http set up : define how long timeout can take
   final _openAI = OpenAI.instance.build(
-    token: "apikeyOpenReeveAi",
+    token: apikeyOpenReeveAi,
     baseOption: HttpSetup(
       receiveTimeout: const Duration(
         seconds: 5,
