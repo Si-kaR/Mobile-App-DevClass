@@ -46,3 +46,7 @@ app.*.map.json
 
 # Qey SeQret
 api_service.dart
+
+# Environment files
+.env
+*.env
